@@ -1,1 +1,2572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Producer Kagoh | Kanairo Classic Records</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles & Variables */
+        :root {
+            --primary-bg: #000000;
+            --secondary-bg: #111111;
+            --accent-color: #FFD700;
+            --accent-color-glow: rgba(255, 215, 0, 0.3);
+            --neon-blue: #00FFFF;
+            --neon-red: #FF4500;
+            --text-color: #FFFFFF;
+            --text-secondary: #AAAAAA;
+            --transition: all 0.3s ease;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Page Container for Navigation */
+        .page {
+            display: none;
+            min-height: 100vh;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            background: linear-gradient(to right, var(--accent-color), var(--neon-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(to right, var(--accent-color), transparent);
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            transition: var(--transition);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 0.5rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: var(--text-color);
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .nav-link:hover {
+            color: var(--accent-color);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .book-now-btn {
+            background-color: transparent;
+            color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+            padding: 0.7rem 1.5rem;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 0 10px var(--accent-color-glow);
+        }
+
+        .book-now-btn:hover {
+            background-color: var(--accent-color);
+            color: var(--primary-bg);
+            box-shadow: 0 0 20px var(--accent-color-glow);
+            transform: translateY(-3px);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9));
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: url('https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover no-repeat;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+
+        .hero h1 {
+            margin-bottom: 1.5rem;
+            font-size: 4rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            color: var(--text-color);
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: var(--primary-bg);
+            box-shadow: 0 0 15px var(--accent-color-glow);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--neon-blue);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            transform: translateY(-3px);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--text-color);
+            border: 2px solid var(--text-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--text-color);
+            color: var(--primary-bg);
+            transform: translateY(-3px);
+        }
+
+        /* Featured Music */
+        .featured-music {
+            background-color: var(--secondary-bg);
+            padding: 5rem 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .music-slider {
+            display: flex;
+            gap: 2rem;
+            overflow-x: auto;
+            padding: 1rem 0;
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent-color) var(--secondary-bg);
+        }
+
+        .music-slider::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .music-slider::-webkit-scrollbar-track {
+            background: var(--secondary-bg);
+            border-radius: 10px;
+        }
+
+        .music-slider::-webkit-scrollbar-thumb {
+            background: var(--accent-color);
+            border-radius: 10px;
+        }
+
+        .track-card {
+            min-width: 250px;
+            background-color: var(--primary-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: var(--box-shadow);
+        }
+
+        .track-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.2);
+        }
+
+        .track-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .track-info {
+            padding: 1.5rem;
+        }
+
+        .track-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .track-artist {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .play-btn {
+            background-color: var(--accent-color);
+            color: var(--primary-bg);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .play-btn:hover {
+            background-color: var(--neon-blue);
+            transform: scale(1.1);
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-img {
+            width: 100%;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        .timeline {
+            position: relative;
+            margin: 3rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: var(--accent-color);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 0;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+        }
+
+        .timeline-year {
+            color: var(--accent-color);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Music Page */
+        .music-filters {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background-color: transparent;
+            color: var(--text-color);
+            border: 1px solid var(--text-secondary);
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background-color: var(--accent-color);
+            color: var(--primary-bg);
+            border-color: var(--accent-color);
+        }
+
+        .music-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .music-card {
+            background-color: var(--secondary-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: var(--box-shadow);
+        }
+
+        .music-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.2);
+        }
+
+        .music-card-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .music-card-content {
+            padding: 1.5rem;
+        }
+
+        .music-card-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .music-card-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .music-card-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: 0.7rem 0;
+            border-radius: var(--border-radius);
+            text-align: center;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            font-size: 0.9rem;
+        }
+
+        .stream-btn {
+            background-color: var(--accent-color);
+            color: var(--primary-bg);
+        }
+
+        .stream-btn:hover {
+            background-color: var(--neon-blue);
+        }
+
+        .download-btn {
+            background-color: transparent;
+            color: var(--text-color);
+            border: 1px solid var(--text-color);
+        }
+
+        .download-btn:hover {
+            background-color: var(--text-color);
+            color: var(--primary-bg);
+        }
+
+        /* Beats Page */
+        .beats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .beat-card {
+            background-color: var(--secondary-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: var(--box-shadow);
+        }
+
+        .beat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 255, 255, 0.2);
+        }
+
+        .beat-waveform {
+            height: 100px;
+            background: linear-gradient(90deg, var(--accent-color), var(--neon-blue));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .wave {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 20px;
+            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAwIDEwMCI+PHBhdGggZD0iTTAsNTBoMjVjMjUsMCAyNSw1MCA1MCw1MHM1MC01MCA1MC01MGgyNWMyNSwwIDI1LDUwIDUwLDUwczUwLTUwIDUwLTUwaDI1YzI1LDAgMjUsNTAgNTAsNTBzNTAtNTAgNTAtNTBoMjVjMjUsMCAyNSw1MCA1MCw1MHM1MC01MCA1MC01MGgyNWMyNSwwIDI1LDUwIDUwLDUwczUwLTUwIDUwLTUwaDI1YzI1LDAgMjUsNTAgNTAsNTBzNTAtNTAgNTAtNTBoMjVjMjUsMCAyNSw1MCA1MCw1MHM1MC01MCA1MC01MGgyNWMyNSwwIDI1LDUwIDUwLDUwczUwLTUwIDUwLTUwaDI1YzI1LDAgMjUsNTAgNTAsNTBzNTAtNTAgNTAtNTBoMjVjMjUsMCAyNSw1MCA1MCw1MHM1MC01MCA1MC01MGgyNWMyNSwwIDI1LDUwIDUwLDUwczUwLTUwIDUwLTUwaDI1YzI1LDAgMjUsNTAgNTAsNTBzNTAtNTAgNTAtNTBoMjVjMjUsMCAyNSw1MCA1MCw1MHM1MC01MCA1MC01MGgyNWMyNSwwIDI1LDUwIDUwLDUwczUwLTUwIDUwLTUwaDI1YzI1LDAgMjUsNTAgNTAsNTBzNTAtNTAgNTAtNTBoMjVjMjUsMCAyNSw1MCA1MCw1MHM1MC01MCA1MC01MEgxMDAwVjEwMEgwVjUweiIgZmlsbD0iIzAwMCIgZmlsbC1vcGFjaXR5PSIwLjIiLz48L3N2Zz4=') repeat-x;
+            animation: wave 2s linear infinite;
+        }
+
+        @keyframes wave {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100px); }
+        }
+
+        .beat-info {
+            padding: 1.5rem;
+        }
+
+        .beat-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .beat-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .beat-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .price-tag {
+            background-color: var(--accent-color);
+            color: var(--primary-bg);
+            padding: 0.3rem 0.8rem;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* Artists Page */
+        .artists-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .artist-card {
+            background-color: var(--secondary-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: var(--box-shadow);
+            position: relative;
+        }
+
+        .artist-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(255, 215, 0, 0.2);
+        }
+
+        .artist-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .artist-card:hover .artist-img {
+            filter: brightness(0.7);
+        }
+
+        .artist-info {
+            padding: 1.5rem;
+        }
+
+        .artist-name {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .artist-genre {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .artist-links {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .artist-link {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background-color: var(--primary-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .artist-link:hover {
+            background-color: var(--accent-color);
+            color: var(--primary-bg);
+            transform: scale(1.1);
+        }
+
+        /* Studio Page */
+        .studio-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .gallery-item {
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            height: 200px;
+            position: relative;
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.05);
+            filter: brightness(0.8);
+        }
+
+        .equipment-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .equipment-item {
+            background-color: var(--secondary-bg);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+
+        .equipment-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 255, 255, 0.2);
+        }
+
+        .booking-packages {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .package-card {
+            background-color: var(--secondary-bg);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+
+        .package-card:hover {
+            border-color: var(--accent-color);
+            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .package-card.featured {
+            border-color: var(--accent-color);
+            position: relative;
+            transform: scale(1.05);
+        }
+
+        .package-card.featured::before {
+            content: 'POPULAR';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--accent-color);
+            color: var(--primary-bg);
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .package-name {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .package-price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .package-features {
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .package-feature {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .package-feature i {
+            color: var(--accent-color);
+            margin-right: 0.5rem;
+        }
+
+        /* Bookings Page */
+        .booking-form-container {
+            background-color: var(--secondary-bg);
+            border-radius: var(--border-radius);
+            padding: 3rem;
+            box-shadow: var(--box-shadow);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            border: 1px solid #333;
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            transition: var(--transition);
+        }
+
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 10px var(--accent-color-glow);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .payment-options {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .payment-option {
+            flex: 1;
+            text-align: center;
+            padding: 1rem;
+            border: 1px solid #333;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .payment-option:hover, .payment-option.selected {
+            border-color: var(--accent-color);
+            background-color: rgba(255, 215, 0, 0.1);
+        }
+
+        .payment-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Payment Pages */
+        .payment-page {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: var(--secondary-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        .payment-instructions {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background-color: var(--primary-bg);
+            border-radius: var(--border-radius);
+        }
+
+        .payment-steps {
+            margin-left: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .payment-steps li {
+            margin-bottom: 0.8rem;
+        }
+
+        /* News Page */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .news-card {
+            background-color: var(--secondary-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: var(--box-shadow);
+        }
+
+        .news-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(255, 215, 0, 0.2);
+        }
+
+        .news-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .news-content {
+            padding: 1.5rem;
+        }
+
+        .news-date {
+            color: var(--accent-color);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .news-title {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .news-excerpt {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .read-more {
+            color: var(--accent-color);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .read-more i {
+            margin-left: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .read-more:hover {
+            color: var(--neon-blue);
+        }
+
+        .read-more:hover i {
+            transform: translateX(5px);
+        }
+
+        /* Merch Page */
+        .merch-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .merch-card {
+            background-color: var(--secondary-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: var(--box-shadow);
+        }
+
+        .merch-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(255, 215, 0, 0.2);
+        }
+
+        .merch-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .merch-info {
+            padding: 1.5rem;
+        }
+
+        .merch-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .merch-price {
+            color: var(--accent-color);
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .merch-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .add-to-cart {
+            flex: 1;
+            background-color: var(--accent-color);
+            color: var(--primary-bg);
+            border: none;
+            padding: 0.8rem 0;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .add-to-cart:hover {
+            background-color: var(--neon-blue);
+        }
+
+        /* Gallery Page */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .gallery-grid-item {
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            height: 250px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .gallery-grid-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .gallery-grid-item:hover .gallery-grid-img {
+            transform: scale(1.05);
+            filter: brightness(0.8);
+        }
+
+        /* Press Kit Page */
+        .press-kit-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .press-kit-downloads {
+            background-color: var(--secondary-bg);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+        }
+
+        .download-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #333;
+        }
+
+        .download-item:last-child {
+            border-bottom: none;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary-bg);
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background-color: var(--accent-color);
+            color: var(--primary-bg);
+            transform: translateY(-5px);
+        }
+
+        .newsletter-form {
+            display: flex;
+            margin-top: 1rem;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 0.8rem;
+            border-radius: var(--border-radius) 0 0 var(--border-radius);
+            border: 1px solid #333;
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+        }
+
+        .newsletter-btn {
+            background-color: var(--accent-color);
+            color: var(--primary-bg);
+            border: none;
+            padding: 0 1.5rem;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .newsletter-btn:hover {
+            background-color: var(--neon-blue);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #333;
+            color: var(--text-secondary);
+        }
+
+        /* Floating Elements */
+        .floating-music-player {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            padding: 1rem;
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .player-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .player-img {
+            width: 50px;
+            height: 50px;
+            border-radius: var(--border-radius);
+            object-fit: cover;
+        }
+
+        .player-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .player-title {
+            font-weight: 600;
+        }
+
+        .player-artist {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .player-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .control-btn {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .control-btn:hover {
+            color: var(--accent-color);
+        }
+
+        .play-pause {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+            color: var(--primary-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .play-pause:hover {
+            background-color: var(--neon-blue);
+        }
+
+        .progress-bar {
+            flex: 1;
+            height: 4px;
+            background-color: #333;
+            border-radius: 2px;
+            position: relative;
+            margin: 0 1rem;
+            cursor: pointer;
+        }
+
+        .progress {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            background-color: var(--accent-color);
+            border-radius: 2px;
+            width: 30%;
+        }
+
+        .floating-book-btn {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+            color: var(--primary-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 15px var(--accent-color-glow);
+            z-index: 998;
+            transition: var(--transition);
+            animation: pulse 2s infinite;
+            cursor: pointer;
+        }
+
+        .floating-book-btn:hover {
+            background-color: var(--neon-blue);
+            transform: scale(1.1);
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 15px rgba(255, 215, 0, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(255, 215, 0, 0);
+            }
+        }
+
+        /* Back Button */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent-color);
+            margin-bottom: 2rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .back-btn:hover {
+            color: var(--neon-blue);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 3rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            .about-content, .press-kit-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background-color: var(--primary-bg);
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding-top: 2rem;
+                transition: var(--transition);
+            }
+            
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-btns {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .floating-music-player {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+            
+            .player-info, .player-controls {
+                width: 100%;
+            }
+            
+            .progress-bar {
+                width: 100%;
+                margin: 0.5rem 0;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .section {
+                padding: 3rem 1rem;
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .booking-form-container, .payment-page {
+                padding: 2rem 1.5rem;
+            }
+            
+            .payment-options {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <header>
+        <div class="container nav-container">
+            <a href="#" class="logo" onclick="showPage('home')">
+                <i class="fas fa-compact-disc"></i>
+                <span>KCR</span>
+            </a>
+            
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <ul class="nav-menu">
+                <li><a class="nav-link" onclick="showPage('home')">Home</a></li>
+                <li><a class="nav-link" onclick="showPage('about')">About</a></li>
+                <li><a class="nav-link" onclick="showPage('music')">Music</a></li>
+                <li><a class="nav-link" onclick="showPage('beats')">Beats</a></li>
+                <li><a class="nav-link" onclick="showPage('artists')">Artists</a></li>
+                <li><a class="nav-link" onclick="showPage('studio')">Studio</a></li>
+                <li><a class="nav-link" onclick="showPage('bookings')">Bookings</a></li>
+                <li><a class="nav-link" onclick="showPage('news')">News</a></li>
+                <li><a class="nav-link" onclick="showPage('merch')">Merch</a></li>
+                <li><a class="nav-link" onclick="showPage('gallery')">Gallery</a></li>
+                <li><a class="nav-link" onclick="showPage('contact')">Contact</a></li>
+                <li><a class="nav-link" onclick="showPage('press')">Press Kit</a></li>
+            </ul>
+            
+            <button class="book-now-btn" onclick="showPage('bookings')">Book Now</button>
+        </div>
+    </header>
+
+    <!-- Home Page -->
+    <section id="home" class="page active">
+        <!-- Hero Section -->
+        <div class="hero">
+            <div class="hero-bg"></div>
+            <div class="hero-content">
+                <h1>Producer Kagoh 254 — From the 254 to the World</h1>
+                <p>Founder of Kanairo Classic Records | Music Producer | Sound Engineer</p>
+                <div class="hero-btns">
+                    <button class="btn btn-primary" onclick="showPage('music')">Listen Now</button>
+                    <button class="btn btn-secondary" onclick="showPage('bookings')">Book a Session</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Featured Music Section -->
+        <section class="featured-music section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Featured Music</h2>
+                    <p>Check out my latest productions and collaborations</p>
+                </div>
+                
+                <div class="music-slider">
+                    <div class="track-card">
+                        <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Track 1" class="track-img">
+                        <div class="track-info">
+                            <h3 class="track-title">Nairobi Nights</h3>
+                            <p class="track-artist">Kagoh ft. Various Artists</p>
+                            <button class="play-btn">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="track-card">
+                        <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Track 2" class="track-img">
+                        <div class="track-info">
+                            <h3 class="track-title">Kanairo Vibes</h3>
+                            <p class="track-artist">Kagoh</p>
+                            <button class="play-btn">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="track-card">
+                        <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Track 3" class="track-img">
+                        <div class="track-info">
+                            <h3 class="track-title">City Lights</h3>
+                            <p class="track-artist">Kagoh ft. Blinky Bill</p>
+                            <button class="play-btn">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="track-card">
+                        <img src="https://images.unsplash.com/photo-1571974599782-87624638275f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2068&q=80" alt="Track 4" class="track-img">
+                        <div class="track-info">
+                            <h3 class="track-title">Rhythm of the Streets</h3>
+                            <p class="track-artist">Kagoh ft. Khaligraph Jones</p>
+                            <button class="play-btn">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 3rem;">
+                    <button class="btn btn-primary" onclick="showPage('music')">View All Music</button>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <!-- About Page -->
+    <section id="about" class="page">
+        <div class="section">
+            <div class="container">
+                <div class="back-btn" onclick="showPage('home')">
+                    <i class="fas fa-arrow-left"></i> Back to Home
+                </div>
+                
+                <div class="section-header">
+                    <h2>About Producer Kagoh</h2>
+                    <p>The journey of a visionary music producer from Nairobi to the world</p>
+                </div>
+                
+                <div class="about-content">
+                    <div>
+                        <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Producer Kagoh" class="about-img">
+                    </div>
+                    
+                    <div>
+                        <h3>My Story</h3>
+                        <p>Producer Kagoh is the founder of Kanairo Classic Records, a Nairobi-based music production company dedicated to creating authentic African sounds with global appeal. With over a decade of experience in the music industry, Kagoh has worked with some of the biggest names in East African music.</p>
+                        
+                        <h3>Kanairo Classic Records</h3>
+                        <p>Founded in 2015, Kanairo Classic Records has become a hub for talented artists and producers. Our mission is to preserve and modernize traditional African sounds while creating music that resonates with audiences worldwide.</p>
+                        
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-year">2010</div>
+                                <h4>Started Music Production</h4>
+                                <p>Began producing beats for local artists in Nairobi</p>
+                            </div>
+                            
+                            <div class="timeline-item">
+                                <div class="timeline-year">2015</div>
+                                <h4>Founded Kanairo Classic Records</h4>
+                                <p>Established the record label to nurture local talent</p>
+                            </div>
+                            
+                            <div class="timeline-item">
+                                <div class="timeline-year">2018</div>
+                                <h4>First Major Collaboration</h4>
+                                <p>Worked with international artists on cross-cultural projects</p>
+                            </div>
+                            
+                            <div class="timeline-item">
+                                <div class="timeline-year">2022</div>
+                                <h4>Global Recognition</h4>
+                                <p>Received awards for contributions to African music</p>
+                            </div>
+                        </div>
+                        
+                        <button class="btn btn-primary" onclick="showPage('bookings')">Work With Me</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Music Page -->
+    <section id="music" class="page">
+        <div class="section">
+            <div class="container">
+                <div class="back-btn" onclick="showPage('home')">
+                    <i class="fas fa-arrow-left"></i> Back to Home
+                </div>
+                
+                <div class="section-header">
+                    <h2>Music Catalog</h2>
+                    <p>Stream and download my latest releases</p>
+                </div>
+                
+                <div class="music-filters">
+                    <button class="filter-btn active">All</button>
+                    <button class="filter-btn">Singles</button>
+                    <button class="filter-btn">EPs</button>
+                    <button class="filter-btn">Albums</button>
+                    <button class="filter-btn">Features</button>
+                </div>
+                
+                <div class="music-grid">
+                    <div class="music-card">
+                        <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Album 1" class="music-card-img">
+                        <div class="music-card-content">
+                            <h3 class="music-card-title">Nairobi Nights</h3>
+                            <div class="music-card-meta">
+                                <span>Album • 2023</span>
+                                <span>12 Tracks</span>
+                            </div>
+                            <div class="music-card-actions">
+                                <button class="action-btn stream-btn">Stream</button>
+                                <button class="action-btn download-btn">Download</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="music-card">
+                        <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Single 1" class="music-card-img">
+                        <div class="music-card-content">
+                            <h3 class="music-card-title">Kanairo Vibes</h3>
+                            <div class="music-card-meta">
+                                <span>Single • 2023</span>
+                                <span>1 Track</span>
+                            </div>
+                            <div class="music-card-actions">
+                                <button class="action-btn stream-btn">Stream</button>
+                                <button class="action-btn download-btn">Download</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="music-card">
+                        <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="EP 1" class="music-card-img">
+                        <div class="music-card-content">
+                            <h3 class="music-card-title">City Lights EP</h3>
+                            <div class="music-card-meta">
+                                <span>EP • 2022</span>
+                                <span>5 Tracks</span>
+                            </div>
+                            <div class="music-card-actions">
+                                <button class="action-btn stream-btn">Stream</button>
+                                <button class="action-btn download-btn">Download</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Beats Page -->
+    <section id="beats" class="page">
+        <div class="section">
+            <div class="container">
+                <div class="back-btn" onclick="showPage('home')">
+                    <i class="fas fa-arrow-left"></i> Back to Home
+                </div>
+                
+                <div class="section-header">
+                    <h2>Beats Catalog</h2>
+                    <p>Purchase high-quality beats for your next project</p>
+                </div>
+                
+                <div class="beats-grid">
+                    <div class="beat-card">
+                        <div class="beat-waveform">
+                            <div class="wave"></div>
+                        </div>
+                        <div class="beat-info">
+                            <h3 class="beat-title">Afro Fusion</h3>
+                            <div class="beat-meta">
+                                <span>Afrobeat • 120 BPM</span>
+                                <span class="price-tag">$49</span>
+                            </div>
+                            <div class="beat-actions">
+                                <button class="action-btn stream-btn">Lease</button>
+                                <button class="action-btn download-btn">Exclusive</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="beat-card">
+                        <div class="beat-waveform">
+                            <div class="wave"></div>
+                        </div>
+                        <div class="beat-info">
+                            <h3 class="beat-title">Nairobi Drill</h3>
+                            <div class="beat-meta">
+                                <span>Drill • 140 BPM</span>
+                                <span class="price-tag">$59</span>
+                            </div>
+                            <div class="beat-actions">
+                                <button class="action-btn stream-btn">Lease</button>
+                                <button class="action-btn download-btn">Exclusive</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="beat-card">
+                        <div class="beat-waveform">
+                            <div class="wave"></div>
+                        </div>
+                        <div class="beat-info">
+                            <h3 class="beat-title">Bongo Flava</h3>
+                            <div class="beat-meta">
+                                <span>Tanzanian Pop • 110 BPM</span>
+                                <span class="price-tag">$45</span>
+                            </div>
+                            <div class="beat-actions">
+                                <button class="action-btn stream-btn">Lease</button>
+                                <button class="action-btn download-btn">Exclusive</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="beat-card">
+                        <div class="beat-waveform">
+                            <div class="wave"></div>
+                        </div>
+                        <div class="beat-info">
+                            <h3 class="beat-title">Gengetone</h3>
+                            <div class="beat-meta">
+                                <span>Kenyan Urban • 130 BPM</span>
+                                <span class="price-tag">$55</span>
+                            </div>
+                            <div class="beat-actions">
+                                <button class="action-btn stream-btn">Lease</button>
+                                <button class="action-btn download-btn">Exclusive</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Artists Page -->
+    <section id="artists" class="page">
+        <div class="section">
+            <div class="container">
+                <div class="back-btn" onclick="showPage('home')">
+                    <i class="fas fa-arrow-left"></i> Back to Home
+                </div>
+                
+                <div class="section-header">
+                    <h2>Artists & Collaborations</h2>
+                    <p>Meet the talented artists I've worked with</p>
+                </div>
+                
+                <div class="artists-grid">
+                    <div class="artist-card">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Artist 1" class="artist-img">
+                        <div class="artist-info">
+                            <h3 class="artist-name">Blinky Bill</h3>
+                            <p class="artist-genre">Alternative • Electronic</p>
+                            <div class="artist-links">
+                                <a href="#" class="artist-link"><i class="fab fa-spotify"></i></a>
+                                <a href="#" class="artist-link"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="artist-link"><i class="fab fa-youtube"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="artist-card">
+                        <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Artist 2" class="artist-img">
+                        <div class="artist-info">
+                            <h3 class="artist-name">Karun</h3>
+                            <p class="artist-genre">R&B • Soul</p>
+                            <div class="artist-links">
+                                <a href="#" class="artist-link"><i class="fab fa-spotify"></i></a>
+                                <a href="#" class="artist-link"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="artist-link"><i class="fab fa-youtube"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="artist-card">
+                        <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Artist 3" class="artist-img">
+                        <div class="artist-info">
+                            <h3 class="artist-name">Xenia Manasseh</h3>
+                            <p class="artist-genre">R&B • Pop</p>
+                            <div class="artist-links">
+                                <a href="#" class="artist-link"><i class="fab fa-spotify"></i></a>
+                                <a href="#" class="artist-link"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="artist-link"><i class="fab fa-youtube"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="artist-card">
+                        <img src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Artist 4" class="artist-img">
+                        <div class="artist-info">
+                            <h3 class="artist-name">Khaligraph Jones</h3>
+                            <p class="artist-genre">Hip Hop • Rap</p>
+                            <div class="artist-links">
+                                <a href="#" class="artist-link"><i class="fab fa-spotify"></i></a>
+                                <a href="#" class="artist-link"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="artist-link"><i class="fab fa-youtube"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 3rem;">
+                    <button class="btn btn-primary" onclick="showPage('contact')">Join the Movement</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Studio Page -->
+    <section id="studio" class="page">
+        <div class="section">
+            <div class="container">
+                <div class="back-btn" onclick="showPage('home')">
+                    <i class="fas fa-arrow-left"></i> Back to Home
+                </div>
+                
+                <div class="section-header">
+                    <h2>Studio & Equipment</h2>
+                    <p>State-of-the-art recording facilities in Nairobi</p>
+                </div>
+                
+                <div class="studio-gallery">
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2053&q=80" alt="Studio 1" class="gallery-img">
+                    </div>
+                    
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Studio 2" class="gallery-img">
+                    </div>
+                    
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1596727147705-61a532a659bd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Studio 3" class="gallery-img">
+                    </div>
+                </div>
+                
+                <h3 style="margin-bottom: 1.5rem;">Equipment</h3>
+                <div class="equipment-list">
+                    <div class="equipment-item">
+                        <h4>Microphones</h4>
+                        <p>Neumann U87, Shure SM7B, AKG C414</p>
+                    </div>
+                    
+                    <div class="equipment-item">
+                        <h4>Monitors</h4>
+                        <p>Yamaha HS8, Adam A7X</p>
+                    </div>
+                    
+                    <div class="equipment-item">
+                        <h4>Interface</h4>
+                        <p>Universal Audio Apollo Twin X</p>
+                    </div>
+                    
+                    <div class="equipment-item">
+                        <h4>Software</h4>
+                        <p>Pro Tools, Logic Pro X, Ableton Live</p>
+                    </div>
+                </div>
+                
+                <h3 style="margin-bottom: 1.5rem;">Booking Packages</h3>
+                <div class="booking-packages">
+                    <div class="package-card">
+                        <h3 class="package-name">1 Hour Session</h3>
+                        <div class="package-price">$50</div>
+                        <ul class="package-features">
+                            <li class="package-feature"><i class="fas fa-check"></i> Professional Recording</li>
+                            <li class="package-feature"><i class="fas fa-check"></i> Basic Mixing</li>
+                            <li class="package-feature"><i class="fas fa-check"></i> 1 Revision</li>
+                        </ul>
+                        <button class="btn btn-primary" onclick="showPage('bookings')">Book Now</button>
+                    </div>
+                    
+                    <div class="package-card featured">
+                        <h3 class="package-name">Half Day</h3>
+                        <div class="package-price">$200</div>
+                        <ul class="package-features">
+                            <li class="package-feature"><i class="fas fa-check"></i> 4 Hours Recording</li>
+                            <li class="package-feature"><i class="fas fa-check"></i> Professional Mixing</li>
+                            <li class="package-feature"><i class="fas fa-check"></i> 3 Revisions</li>
+                            <li class="package-feature"><i class="fas fa-check"></i> Mastered Track</li>
+                        </ul>
+                        <button class="btn btn-primary" onclick="showPage('bookings')">Book Now</button>
+                    </div>
+                    
+                    <div class="package-card">
+                        <h3 class="package-name">Full Day</h3>
+                        <div class="package-price">$350</div>
+                        <ul class="package-features">
+                            <li class="package-feature"><i class="fas fa-check"></i> 8 Hours Recording</li>
+                            <li class="package-feature"><i class="fas fa-check"></i> Professional Mixing & Mastering</li>
+                            <li class="package-feature"><i class="fas fa-check"></i> Unlimited Revisions</li>
+                            <li class="package-feature"><i class="fas fa-check"></i> Video Content</li>
+                        </ul>
+                        <button class="btn btn-primary" onclick="showPage('bookings')">Book Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bookings Page -->
+    <section id="bookings" class="page">
+        <div class="section">
+            <div class="container">
+                <div class="back-btn" onclick="showPage('home')">
+                    <i class="fas fa-arrow-left"></i> Back to Home
+                </div>
+                
+                <div class="section-header">
+                    <h2>Book a Session</h2>
+                    <p>Reserve your studio time or production session</p>
+                </div>
+                
+                <div class="booking-form-container">
+                    <form id="booking-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="full-name" class="form-label">Full Name</label>
+                                <input type="text" id="full-name" class="form-input" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" id="email" class="form-input" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone" class="form-label">Phone / WhatsApp</label>
+                                <input type="tel" id="phone" class="form-input" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="session-type" class="form-label">Type of Session</label>
+                                <select id="session-type" class="form-select" required>
+                                    <option value="">Select session type</option>
+                                    <option value="recording">Recording</option>
+                                    <option value="beat">Beat Production</option>
+                                    <option value="feature">Feature/Collaboration</option>
+                                    <option value="event">Event Production</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="date" class="form-label">Preferred Date</label>
+                                <input type="date" id="date" class="form-input" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="time" class="form-label">Preferred Time</label>
+                                <input type="time" id="time" class="form-input" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="notes" class="form-label">Additional Notes</label>
+                            <textarea id="notes" class="form-textarea" rows="4"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Payment Method</label>
+                            <div class="payment-options">
+                                <div class="payment-option selected" data-payment="mpesa">
+                                    <div class="payment-icon">
+                                        <i class="fas fa-money-bill-wave"></i>
+                                    </div>
+                                    <div>M-Pesa</div>
+                                </div>
+                                
+                                <div class="payment-option" data-payment="paypal">
+                                    <div class="payment-icon">
+                                        <i class="fab fa-paypal"></i>
+                                    </div>
+                                    <div>PayPal</div>
+                                </div>
+                                
+                                <div class="payment-option" data-payment="card">
+                                    <div class="payment-icon">
+                                        <i class="fas fa-credit-card"></i>
+                                    </div>
+                                    <div>Credit Card</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button type="button" class="btn btn-primary" style="width: 100%;" onclick="processBooking()">Proceed to Payment</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Payment Pages -->
+    <section id="mpesa-payment" class="page">
+        <div class="section">
+            <div class="container">
+                <div class="back-btn" onclick="showPage('bookings')">
+                    <i class="fas fa-arrow-left"></i> Back to Booking
+                </div>
+                
+                <div class="payment-page">
+                    <h2>M-Pesa Payment</h2>
+                    <p>Complete your booking by making payment via M-Pesa</p>
+                    
+                    <div class="payment-instructions">
+                        <h3>Payment Instructions</h3>
+                        <ol class="payment-steps">
+                            <li>Go to M-Pesa on your phone</li>
+                            <li>Select "Lipa Na M-Pesa"</li>
+                            <li>Select "Pay Bill"</li>
+                            <li>Enter Business Number: <strong>123456</strong></li>
+                            <li>Enter Account Number: <strong id="mpesa-account">KCR-BOOKING-001</strong></li>
+                            <li>Enter Amount: <strong id="mpesa-amount">$50</strong></li>
+                            <li>Enter your M-Pesa PIN and confirm</li>
+                        </ol>
+                    </div>
+                    
+                    <button class="btn btn-primary" style="width: 100%;" onclick="completePayment('mpesa')">Confirm Payment</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="paypal-payment" class="page">
+        <div class="section">
+            <div class="container">
+                <div class="back-btn" onclick="showPage('bookings')">
+                    <i class="fas fa-arrow-left"></i> Back to Booking
+                </div>
+                
+                <div class="payment-page">
+                    <h2>PayPal Payment</h2>
+                    <p>Complete your booking by making payment via PayPal</p>
+                    
+                    <div class="payment-instructions">
+                        <h3>Payment Instructions</h3>
+                        <p>You will be redirected to PayPal to complete your payment of <strong id="paypal-amount">$50</strong></p>
+                    </div>
+                    
+                    <button class="btn btn-primary" style="width: 100%;" onclick="completePayment('paypal')">Proceed to PayPal</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="card-payment" class="page">
+        <div class="section">
+            <div class="container">
+                <div class="back-btn" onclick="showPage('bookings')">
+                    <i class="fas fa-arrow-left"></i> Back to Booking
+                </div>
+                
+                <div class="payment-page">
+                    <h2>Credit Card Payment</h2>
+                    <p>Complete your booking by making payment with your credit card</p>
+                    
+                    <div class="payment-instructions">
+                        <h3>Enter Card Details</h3>
+                        <div class="form-group">
+                            <label for="card-number" class="form-label">Card Number</label>
+                            <input type="text" id="card-number" class="form-input" placeholder="1234 5678 9012 3456">
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="expiry-date" class="form-label">Expiry Date</label>
+                                <input type="text" id="expiry-date" class="form-input" placeholder="MM/YY">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="cvv" class="form-label">CVV</label>
+                                <input type="text" id="cvv" class="form-input" placeholder="123">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="card-name" class="form-label">Name on Card</label>
+                            <input type="text" id="card-name" class="form-input">
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-primary" style="width: 100%;" onclick="completePayment('card')">Pay <span id="card-amount">$50</span></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Payment Confirmation Page -->
+    <section id="payment-confirmation" class="page">
+        <div class="section">
+            <div class="container">
+                <div class="payment-page" style="text-align: center;">
+                    <i class="fas fa-check-circle" style="font-size: 5rem; color: var(--accent-color); margin-bottom: 2rem;"></i>
+                    <h2>Payment Successful!</h2>
+                    <p>Thank you for your booking. Your session has been confirmed.</p>
+                    <p>You will receive a confirmation email with all the details shortly.</p>
+                    
+                    <div style="margin-top: 3rem;">
+                        <button class="btn btn-primary" onclick="showPage('home')">Return to Home</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Page -->
+    <section id="news" class="page">
+        <div class="section">
+            <div class="container">
+                <div class="back-btn" onclick="showPage('home')">
+                    <i class="fas fa-arrow-left"></i> Back to Home
+                </div>
+                
+                <div class="section-header">
+                    <h2>News & Events</h2>
+                    <p>Stay updated with the latest from Kanairo Classic Records</p>
+                </div>
+                
+                <div class="news-grid">
+                    <div class="news-card">
+                        <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="News 1" class="news-img">
+                        <div class="news-content">
+                            <div class="news-date">June 15, 2023</div>
+                            <h3 class="news-title">New Album "Nairobi Nights" Released</h3>
+                            <p class="news-excerpt">Producer Kagoh drops his highly anticipated album featuring collaborations with top East African artists.</p>
+                            <a class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="news-card">
+                        <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="News 2" class="news-img">
+                        <div class="news-content">
+                            <div class="news-date">May 28, 2023</div>
+                            <h3 class="news-title">Kanairo Classic Records Anniversary</h3>
+                            <p class="news-excerpt">Celebrating 8 years of producing authentic African sounds with global appeal.</p>
+                            <a class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="news-card">
+                        <img src="https://images.unsplash.com/photo-1571974599782-87624638275f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2068&q=80" alt="News 3" class="news-img">
+                        <div class="news-content">
+                            <div class="news-date">April 12, 2023</div>
+                            <h3 class="news-title">Upcoming Tour: East Africa 2023</h3>
+                            <p class="news-excerpt">Producer Kagoh announces a tour across East Africa with stops in Nairobi, Dar es Salaam, and Kampala.</p>
+                            <a class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Merch Page -->
+    <section id="merch" class="page">
+        <div class="section">
+            <div class="container">
+                <div class="back-btn" onclick="showPage('home')">
+                    <i class="fas fa-arrow-left"></i> Back to Home
+                </div>
+                
+                <div class="section-header">
+                    <h2>Official Merchandise</h2>
+                    <p>Represent Kanairo Classic Records with our exclusive merchandise</p>
+                </div>
+                
+                <div class="merch-grid">
+                    <div class="merch-card">
+                        <img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Hoodie" class="merch-img">
+                        <div class="merch-info">
+                            <h3 class="merch-title">KCR Logo Hoodie</h3>
+                            <div class="merch-price">$45</div>
+                            <div class="merch-actions">
+                                <button class="add-to-cart">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="merch-card">
+                        <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2080&q=80" alt="T-Shirt" class="merch-img">
+                        <div class="merch-info">
+                            <h3 class="merch-title">KCR Classic T-Shirt</h3>
+                            <div class="merch-price">$25</div>
+                            <div class="merch-actions">
+                                <button class="add-to-cart">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="merch-card">
+                        <img src="https://images.unsplash.com/photo-1588850561407-ed78c282e89b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2052&q=80" alt="Cap" class="merch-img">
+                        <div class="merch-info">
+                            <h3 class="merch-title">KCR Signature Cap</h3>
+                            <div class="merch-price">$20</div>
+                            <div class="merch-actions">
+                                <button class="add-to-cart">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="merch-card">
+                        <img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2064&q=80" alt="Accessories" class="merch-img">
+                        <div class="merch-info">
+                            <h3 class="merch-title">Studio Accessories Pack</h3>
+                            <div class="merch-price">$30</div>
+                            <div class="merch-actions">
+                                <button class="add-to-cart">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Page -->
+    <section id="gallery" class="page">
+        <div class="section">
+            <div class="container">
+                <div class="back-btn" onclick="showPage('home')">
+                    <i class="fas fa-arrow-left"></i> Back to Home
+                </div>
+                
+                <div class="section-header">
+                    <h2>Gallery</h2>
+                    <p>Behind the scenes, studio sessions, and live events</p>
+                </div>
+                
+                <div class="gallery-grid">
+                    <div class="gallery-grid-item">
+                        <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Gallery 1" class="gallery-grid-img">
+                    </div>
+                    
+                    <div class="gallery-grid-item">
+                        <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Gallery 2" class="gallery-grid-img">
+                    </div>
+                    
+                    <div class="gallery-grid-item">
+                        <img src="https://images.unsplash.com/photo-1571974599782-87624638275f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2068&q=80" alt="Gallery 3" class="gallery-grid-img">
+                    </div>
+                    
+                    <div class="gallery-grid-item">
+                        <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Gallery 4" class="gallery-grid-img">
+                    </div>
+                    
+                    <div class="gallery-grid-item">
+                        <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Gallery 5" class="gallery-grid-img">
+                    </div>
+                    
+                    <div class="gallery-grid-item">
+                        <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2053&q=80" alt="Gallery 6" class="gallery-grid-img">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Page -->
+    <section id="contact" class="page">
+        <div class="section">
+            <div class="container">
+                <div class="back-btn" onclick="showPage('home')">
+                    <i class="fas fa-arrow-left"></i> Back to Home
+                </div>
+                
+                <div class="section-header">
+                    <h2>Contact Us</h2>
+                    <p>Get in touch for collaborations, bookings, or inquiries</p>
+                </div>
+                
+                <div class="booking-form-container">
+                    <form id="contact-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="contact-name" class="form-label">Full Name</label>
+                                <input type="text" id="contact-name" class="form-input" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="contact-email" class="form-label">Email</label>
+                                <input type="email" id="contact-email" class="form-input" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contact-subject" class="form-label">Subject</label>
+                            <input type="text" id="contact-subject" class="form-input" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contact-message" class="form-label">Message</label>
+                            <textarea id="contact-message" class="form-textarea" rows="6" required></textarea>
+                        </div>
+                        
+                        <button type="button" class="btn btn-primary" style="width: 100%;" onclick="sendMessage()">Send Message</button>
+                    </form>
+                </div>
+                
+                <div style="margin-top: 4rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+                    <div>
+                        <h3>Contact Information</h3>
+                        <p><i class="fas fa-map-marker-alt" style="margin-right: 0.5rem;"></i> Nairobi, Kenya</p>
+                        <p><i class="fas fa-phone" style="margin-right: 0.5rem;"></i> +254 700 123 456</p>
+                        <p><i class="fas fa-envelope" style="margin-right: 0.5rem;"></i> info@kanairoclassic.com</p>
+                    </div>
+                    
+                    <div>
+                        <h3>Studio Location</h3>
+                        <p>Kanairo Classic Records Studio</p>
+                        <p>Westlands, Nairobi</p>
+                        <p>Open: Mon-Sat, 9AM-6PM</p>
+                    </div>
+                    
+                    <div>
+                        <h3>Follow Us</h3>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-spotify"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Press Kit Page -->
+    <section id="press" class="page">
+        <div class="section">
+            <div class="container">
+                <div class="back-btn" onclick="showPage('home')">
+                    <i class="fas fa-arrow-left"></i> Back to Home
+                </div>
+                
+                <div class="section-header">
+                    <h2>Press Kit</h2>
+                    <p>Media resources for promoters, labels, and media houses</p>
+                </div>
+                
+                <div class="press-kit-content">
+                    <div>
+                        <h3>About Producer Kagoh</h3>
+                        <p>Producer Kagoh is a visionary music producer and the founder of Kanairo Classic Records, based in Nairobi, Kenya. With over a decade of experience in the music industry, Kagoh has established himself as one of East Africa's most innovative producers, blending traditional African sounds with contemporary global music trends.</p>
+                        
+                        <p>His work has been featured on major platforms and he has collaborated with some of the biggest names in African music. Kagoh's mission is to preserve and modernize authentic African sounds while creating music that resonates with audiences worldwide.</p>
+                        
+                        <h3 style="margin-top: 2rem;">Key Achievements</h3>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>Founded Kanairo Classic Records in 2015</li>
+                            <li>Produced over 100 tracks for various artists</li>
+                            <li>Featured on major streaming platforms</li>
+                            <li>Collaborated with top East African artists</li>
+                            <li>Received multiple industry awards and nominations</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="press-kit-downloads">
+                        <h3>Download Resources</h3>
+                        
+                        <div class="download-item">
+                            <div>
+                                <h4>Bio & Press Release</h4>
+                                <p>Official biography and press materials</p>
+                            </div>
+                            <button class="btn btn-primary">Download</button>
+                        </div>
+                        
+                        <div class="download-item">
+                            <div>
+                                <h4>High-Res Photos</h4>
+                                <p>Professional photos for media use</p>
+                            </div>
+                            <button class="btn btn-primary">Download</button>
+                        </div>
+                        
+                        <div class="download-item">
+                            <div>
+                                <h4>Logo Pack</h4>
+                                <p>Brand logos in various formats</p>
+                            </div>
+                            <button class="btn btn-primary">Download</button>
+                        </div>
+                        
+                        <div class="download-item">
+                            <div>
+                                <h4>Music Catalog</h4>
+                                <p>Complete discography and credits</p>
+                            </div>
+                            <button class="btn btn-primary">Download</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>KCR</h3>
+                    <p>Kanairo Classic Records is a Nairobi-based music production company creating authentic African sounds with global appeal.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-spotify"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a onclick="showPage('home')">Home</a></li>
+                        <li><a onclick="showPage('about')">About</a></li>
+                        <li><a onclick="showPage('music')">Music</a></li>
+                        <li><a onclick="showPage('beats')">Beats</a></li>
+                        <li><a onclick="showPage('artists')">Artists</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Services</h3>
+                    <ul class="footer-links">
+                        <li><a onclick="showPage('studio')">Studio Booking</a></li>
+                        <li><a onclick="showPage('bookings')">Production</a></li>
+                        <li><a onclick="showPage('beats')">Beat Leasing</a></li>
+                        <li><a onclick="showPage('artists')">Collaborations</a></li>
+                        <li><a onclick="showPage('news')">Events</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to get updates on new releases, events, and exclusive content.</p>
+                    <form class="newsletter-form">
+                        <input type="email" class="newsletter-input" placeholder="Your email address">
+                        <button type="submit" class="newsletter-btn">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 Producer Kagoh - Kanairo Classic Records. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Music Player -->
+    <div class="floating-music-player">
+        <div class="player-info">
+            <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80" alt="Now Playing" class="player-img">
+            <div class="player-details">
+                <div class="player-title">Nairobi Nights</div>
+                <div class="player-artist">Kagoh</div>
+            </div>
+        </div>
+        
+        <div class="player-controls">
+            <button class="control-btn">
+                <i class="fas fa-step-backward"></i>
+            </button>
+            <button class="control-btn play-pause">
+                <i class="fas fa-play"></i>
+            </button>
+            <button class="control-btn">
+                <i class="fas fa-step-forward"></i>
+            </button>
+        </div>
+        
+        <div class="progress-bar">
+            <div class="progress"></div>
+        </div>
+        
+        <div class="player-controls">
+            <button class="control-btn">
+                <i class="fas fa-volume-up"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Floating Book Button -->
+    <div class="floating-book-btn" onclick="showPage('bookings')">
+        <i class="fas fa-calendar-alt"></i>
+    </div>
+
+    <script>
+        // Page Navigation
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show the selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+            
+            // Close mobile menu if open
+            if(navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+        }
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navMenu.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+
+        // Payment Option Selection
+        const paymentOptions = document.querySelectorAll('.payment-option');
+        
+        paymentOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                paymentOptions.forEach(opt => opt.classList.remove('selected'));
+                option.classList.add('selected');
+            });
+        });
+
+        // Music Player Functionality
+        const playPauseBtn = document.querySelector('.play-pause');
+        let isPlaying = false;
+        
+        playPauseBtn.addEventListener('click', () => {
+            isPlaying = !isPlaying;
+            playPauseBtn.innerHTML = isPlaying ? 
+                '<i class="fas fa-pause"></i>' : '<i class="fas fa-play"></i>';
+        });
+
+        // Filter Button Active State
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            });
+        });
+
+        // Booking Form Processing
+        function processBooking() {
+            // Get selected payment method
+            const selectedPayment = document.querySelector('.payment-option.selected').dataset.payment;
+            
+            // Calculate amount based on session type (simplified)
+            const sessionType = document.getElementById('session-type').value;
+            let amount = 50; // Default
+            
+            if (sessionType === 'recording') amount = 100;
+            else if (sessionType === 'beat') amount = 150;
+            else if (sessionType === 'feature') amount = 200;
+            else if (sessionType === 'event') amount = 500;
+            
+            // Update payment amounts
+            document.getElementById('mpesa-amount').textContent = '$' + amount;
+            document.getElementById('paypal-amount').textContent = '$' + amount;
+            document.getElementById('card-amount').textContent = '$' + amount;
+            
+            // Generate a booking reference
+            const bookingRef = 'KCR-BOOKING-' + Math.floor(1000 + Math.random() * 9000);
+            document.getElementById('mpesa-account').textContent = bookingRef;
+            
+            // Redirect to appropriate payment page
+            showPage(selectedPayment + '-payment');
+        }
+
+        // Complete Payment
+        function completePayment(method) {
+            // In a real application, this would process the payment
+            // For this demo, we'll just show a confirmation
+            showPage('payment-confirmation');
+        }
+
+        // Send Contact Message
+        function sendMessage() {
+            alert('Message sent successfully! We will get back to you soon.');
+            document.getElementById('contact-form').reset();
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set current year in footer
+            document.querySelector('.footer-bottom p').innerHTML = 
+                '&copy; ' + new Date().getFullYear() + ' Producer Kagoh - Kanairo Classic Records. All Rights Reserved.';
+        });
+    </script>
+</body>
+</html>
